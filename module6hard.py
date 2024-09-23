@@ -50,7 +50,6 @@ class Figure:
 
 class Circle(Figure):   # Готово
     sides_count = 1
-    circle_side_count = 1
 
     def __init__(self, color, *sides):
         super().__init__(color, *sides)
@@ -66,7 +65,6 @@ class Circle(Figure):   # Готово
 
 class Triangle(Figure):  # Готово
     sides_count = 3
-    triangle_side_count = 3
 
     def __init__(self, color, *sides):
         super().__init__(color, *sides)
@@ -85,7 +83,6 @@ class Triangle(Figure):  # Готово
 
 class Cube(Figure):   # Готово
     sides_count = 12
-    cube_side_count = 1
 
     def __init__(self, color, *sides):
         super().__init__(color, *sides)
@@ -110,9 +107,9 @@ cube1.set_color(300, 70, 15)  # Не изменится
 print(cube1.get_color())
 #
 # Проверка на изменение сторон:
-cube1.set_sides(5, 3, 12, 4, 5) # Не изменится
+cube1.set_sides(5, 3, 12, 4, 5)  # Не изменится
 print(cube1.get_sides())
-circle1.set_sides(15) # Изменится
+circle1.set_sides(15)  # Изменится
 print(circle1.get_sides())
 #
 # # Проверка периметра (круга), это и есть длина:
