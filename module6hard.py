@@ -1,4 +1,3 @@
-import math
 from math import pi
 from math import sqrt
 
@@ -6,41 +5,41 @@ from math import sqrt
 class Figure:
     sides_count = 0
 
-    def __init__(self, color, *sides):  # Готово
+    def __init__(self, color, *sides):
         self.__sides = sides
         self.__color = color
         self.filled = False
 
-    def get_color(self):  # Готово
+    def get_color(self):
         return list(self.__color)
 
     @staticmethod
-    def __is_valid_color(r, g, b):  # Готово
+    def __is_valid_color(r, g, b):
         if isinstance(r, int) and isinstance(g, int) and isinstance(b, int):
             if r in range(256) and g in range(256) and b in range(256):
                 return True
             return False
 
-    def set_color(self, r, g, b):  # Готово
+    def set_color(self, r, g, b):
         if self.__is_valid_color(r, g, b):
             self.__color = (r, g, b)
 
     @staticmethod
-    def __is_valid_sides(*sides):   # Готово
+    def __is_valid_sides(*sides):
         if all(isinstance(side, int) and side > 0 for side in sides):
             return True
         return False
 
-    def get_sides(self):  # Готово
+    def get_sides(self):
         if len(self.__sides) != self.sides_count:
             return [1] * self.sides_count
         else:
             return self.__sides
 
-    def __len__(self):   # Переделать
+    def __len__(self):
         return sum(self.__sides)
 
-    def set_sides(self, *new_sides):   # Готово
+    def set_sides(self, *new_sides):
         if len(new_sides) == self.sides_count:
             if self.__is_valid_sides(*new_sides):
                 self.__sides = list(new_sides)
@@ -48,7 +47,7 @@ class Figure:
             self.__sides = [*self.__sides] * self.sides_count
 
 
-class Circle(Figure):   # Готово
+class Circle(Figure):
     sides_count = 1
 
     def __init__(self, color, *sides):
@@ -57,13 +56,13 @@ class Circle(Figure):   # Готово
         self.__radius = circle_side / (2 * pi)
 
     def get_square(self):
-        return math.pi * self.__radius ** 2
+        return pi * self.__radius ** 2
 
     def perimeter(self):
-        return 2 * math.pi * self.__radius
+        return 2 * pi * self.__radius
 
 
-class Triangle(Figure):  # Готово
+class Triangle(Figure):
     sides_count = 3
 
     def __init__(self, color, *sides):
@@ -75,13 +74,13 @@ class Triangle(Figure):  # Готово
             self.s = (self.a + self.b + self.c) / 2
 
     def get_square(self):
-        return math.sqrt(self.s * (self.s - self.a) * (self.s - self.b) * (self.s - self.c))
+        return sqrt(self.s * (self.s - self.a) * (self.s - self.b) * (self.s - self.c))
 
     def perimeter(self):
         return self.a + self.b + self.c
 
 
-class Cube(Figure):   # Готово
+class Cube(Figure):
     sides_count = 12
 
     def __init__(self, color, *sides):
