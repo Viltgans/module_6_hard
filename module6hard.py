@@ -15,7 +15,7 @@ class Figure:
         return self.__color
 
     def __is_valid_color(self, r, g, b):
-        return all(isinstance(i, int) and 0 <= i <= 255 for i in [r, g, b])
+        return all(isinstance(i, int) and 0 <= i <= 256 for i in [r, g, b])
 
     def set_color(self, r, g, b):  # Готово
         if self.__is_valid_color(r, g, b):
@@ -40,14 +40,10 @@ class Circle(Figure):  # Готово
 
     def __init__(self, color, *sides):
         super().__init__(color, *sides)
-        self.__radius = self.get_sides()[0] / (2 * math.pi)
+        self.__radius = self.get_sides()[0] / (2 * pi)
 
     def get_square(self):
-        return math.pi * (self.__radius ** 2)
-
-    def set_sides(self, *sides):
-        super().set_sides(*sides)
-        self.__radius = self.get_sides()[0] / (2 * math.pi)
+        return pi * (self.__radius ** 2)
 
 
 class Triangle(Figure):  # Готово
@@ -55,36 +51,23 @@ class Triangle(Figure):  # Готово
 
     def __init__(self, color, *sides):
         super().__init__(color, *sides)
-        self.__height = self.calculate_height()
-
-    def calculate_height(self):
-        s = sum(self.get_sides()) / 2
-        area = (s * (s - self.get_sides()[0]) * (s - self.get_sides()[1]) * (s - self.get_sides()[2])) ** 0.5
-        return 2 * area / self.get_sides()[0]
+        self.a = self.get_sides()[0]
+        self.b = self.get_sides()[1]
+        self.c = self.get_sides()[2]
+        self.p = (self.a + self.b + self.c) / 2
 
     def get_square(self):
-        s = sum(self.get_sides()) / 2
-        return (s * (s - self.get_sides()[0]) * (s - self.get_sides()[1]) * (s - self.get_sides()[2])) ** 0.5
-
-    def set_sides(self, *sides):
-        super().set_sides(*sides)
-        self.__height = self.calculate_height()
+        return sqrt(self.p * (self.p - self.a) * (self.p - self.b) * (self.p - self.c))
 
 
 class Cube(Figure):  # Готово
     sides_count = 12
 
     def __init__(self, color, *sides):
-        if len(sides) != 1:
-            sides = [1]
         super().__init__(color, *sides * 12)
 
     def get_volume(self):
         return self.get_sides()[0] ** 3
-
-    def set_sides(self, *sides):
-        if len(sides) == 1:
-            super().set_sides(*sides * 12)
 
 
 # Проверка
